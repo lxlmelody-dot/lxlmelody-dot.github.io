@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melody - 个人网站</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="placeholder-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Melody</h1>
+                        <p>设计与生活的记录者</p>
+                    </div>
+                </div>
+                
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> 首页</a>
+                    <a href="pages/about.html" class="nav-link"><i class="fas fa-user"></i> 关于我</a>
+                    <a href="pages/portfolio.html" class="nav-link"><i class="fas fa-briefcase"></i> 作品集</a>
+                    <a href="pages/landscapes.html" class="nav-link"><i class="fas fa-mountain"></i> 风景</a>
+                    <a href="pages/foods.html" class="nav-link"><i class="fas fa-utensils"></i> 美食</a>
+                    <a href="pages/contact.html" class="nav-link"><i class="fas fa-envelope"></i> 联系</a>
+                </div>
+                
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="hero-title">欢迎来到我的世界</h2>
+            <p class="hero-subtitle">记录生活，分享美好</p>
+            <a href="pages/about.html" class="hero-btn">了解更多</a>
+        </div>
+    </section>
+
+    <section class="section about-preview">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-card">
+                <div class="about-image">
+                    <div class="placeholder-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h3>Melody</h3>
+                    <p class="about-tag">设计师 & 摄影爱好者</p>
+                    <p class="about-description">
+                        一个热爱生活、追求美好的设计爱好者。在这里分享我的设计作品、旅行风景和美食体验。相信设计可以改变生活，美可以治愈心灵。
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">设计作品</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100+</span>
+                            <span class="stat-label">摄影作品</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">3年</span>
+                            <span class="stat-label">设计经验</span>
+                        </div>
+                    </div>
+                    <a href="pages/about.html" class="btn-primary">查看完整个人资料</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section portfolio-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">精选作品</h2>
+                <a href="pages/portfolio.html" class="view-all">查看全部 <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="placeholder-img portfolio-placeholder">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>作品1</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>品牌设计项目</h3>
+                        <p>为一家咖啡品牌设计的完整视觉系统</p>
+                        <span class="portfolio-tag">品牌设计</span>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="placeholder-img portfolio-placeholder">
+                            <i class="fas fa-laptop"></i>
+                            <span>作品2</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>网页设计</h3>
+                        <p>响应式企业官网设计</p>
+                        <span class="portfolio-tag">网页设计</span>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <div class="placeholder-img portfolio-placeholder">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>作品3</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>移动应用界面</h3>
+                        <p>健康管理App的UI/UX设计</p>
+                        <span class="portfolio-tag">UI设计</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section gallery-section">
+        <div class="container">
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-tab="landscapes">
+                    <i class="fas fa-mountain"></i> 风景摄影
+                </button>
+                <button class="tab-btn" data-tab="foods">
+                    <i class="fas fa-utensils"></i> 美食记录
+                </button>
+            </div>
+            
+            <div class="tab-content active" id="landscapes">
+                <div class="section-header">
+                    <h3 class="tab-title">捕捉自然之美</h3>
+                    <a href="pages/landscapes.html" class="view-all">更多风景 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="placeholder-img landscape-placeholder">
+                            <i class="fas fa-mountain"></i>
+                            <span>风景1</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img landscape-placeholder">
+                            <i class="fas fa-tree"></i>
+                            <span>风景2</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img landscape-placeholder">
+                            <i class="fas fa-water"></i>
+                            <span>风景3</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img landscape-placeholder">
+                            <i class="fas fa-sun"></i>
+                            <span>风景4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="foods">
+                <div class="section-header">
+                    <h3 class="tab-title">美食探索日记</h3>
+                    <a href="pages/foods.html" class="view-all">更多美食 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="placeholder-img food-placeholder">
+                            <i class="fas fa-hamburger"></i>
+                            <span>美食1</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img food-placeholder">
+                            <i class="fas fa-pizza-slice"></i>
+                            <span>美食2</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img food-placeholder">
+                            <i class="fas fa-ice-cream"></i>
+                            <span>美食3</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-img food-placeholder">
+                            <i class="fas fa-coffee"></i>
+                            <span>美食4</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">保持联系</h2>
+            <p class="section-subtitle">欢迎与我交流设计、摄影或生活中的美好事物</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>邮箱</h3>
+                        <p>lxlmelody@example.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>GitHub</h3>
+                        <p>github.com/lxlmelody-dot</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>位置</h3>
+                        <p>中国 · 上海</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-action">
+                <a href="pages/contact.html" class="btn-secondary">
+                    <i class="fas fa-paper-plane"></i> 发送消息
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="placeholder-avatar" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h3>Melody</h3>
+                        <p>用设计记录生活</p>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="pages/about.html">关于我</a></li>
+                        <li><a href="pages/portfolio.html">作品集</a></li>
+                        <li><a href="pages/landscapes.html">风景</a></li>
+                        <li><a href="pages/foods.html">美食</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>社交媒体</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/lxlmelody-dot"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Melody. 保留所有权利. | 简约生活，优雅设计</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/gallery.js"></script>
+</body>
+</html>
