@@ -3,34 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于我 - Melody</title>
+    <title>关于我 | Melody</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #ffe4e9, #ffb6c1);
+            padding: 100px 20px 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .about-detail {
+            padding: 80px 20px;
+        }
+        
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- 页面过渡动画（同首页） -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">加载中...</div>
+        </div>
+    </div>
+
+    <!-- 导航栏（同首页，修改active状态） -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <a href="../index.html" style="text-decoration: none; color: inherit;">
-                        <div class="placeholder-avatar" style="width: 50px; height: 50px; font-size: 1.2rem;">
-                            <i class="fas fa-user"></i>
+                    <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                        <div class="logo-img">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Melody</h1>
+                            <p>生活记录者</p>
                         </div>
                     </a>
-                    <div class="logo-text">
-                        <h1>Melody</h1>
-                        <p>设计与生活的记录者</p>
-                    </div>
                 </div>
                 
                 <div class="nav-menu">
-                    <a href="../index.html" class="nav-link"><i class="fas fa-home"></i> 首页</a>
-                    <a href="about.html" class="nav-link active"><i class="fas fa-user"></i> 关于我</a>
-                    <a href="portfolio.html" class="nav-link"><i class="fas fa-briefcase"></i> 作品集</a>
-                    <a href="landscapes.html" class="nav-link"><i class="fas fa-mountain"></i> 风景</a>
-                    <a href="foods.html" class="nav-link"><i class="fas fa-utensils"></i> 美食</a>
-                    <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> 联系</a>
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    <a href="about.html" class="nav-link active">
+                        <i class="fas fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    <a href="portfolio.html" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>作品集</span>
+                    </a>
+                    <a href="landscapes.html" class="nav-link">
+                        <i class="fas fa-mountain"></i>
+                        <span>风景</span>
+                    </a>
+                    <a href="foods.html" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <span>美食</span>
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>联系</span>
+                    </a>
                 </div>
                 
                 <button class="menu-toggle" id="menuToggle">
@@ -40,16 +110,47 @@
         </nav>
     </header>
 
-    <main style="padding: 100px 20px; max-width: 800px; margin: 0 auto;">
-        <h1 style="font-size: 3rem; margin-bottom: 20px;">关于我</h1>
-        <p style="font-size: 1.2rem; color: #666; margin-bottom: 50px;">
-            这是我的个人介绍页面，正在建设中...
-        </p>
-        <a href="../index.html" style="display: inline-block; padding: 12px 30px; background: #ffb6c1; color: white; border-radius: 50px; text-decoration: none;">
-            返回首页
-        </a>
-    </main>
+    <!-- 页面标题 -->
+    <section class="page-header">
+        <h1 class="page-title">关于我</h1>
+        <p class="page-subtitle">了解我的故事、技能和热情</p>
+    </section>
+
+    <!-- 详细内容 -->
+    <section class="about-detail">
+        <div class="detail-container">
+            <div class="detail-grid">
+                <div class="detail-image">
+                    <div class="image-container">
+                        <div class="profile-placeholder large">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-content">
+                    <h2>个人简介</h2>
+                    <p>我是Melody，一名充满热情的设计师和摄影爱好者。我相信好的设计不仅能解决问题，还能触动人心，创造价值。</p>
+                    <p>在我的职业生涯中，我积累了丰富的设计经验，从品牌设计到用户体验设计，从网页设计到移动应用界面。每一件作品都是我用心创作的成果。</p>
+                    <p>除了设计工作，摄影是我表达对生活热爱的另一种方式。通过镜头捕捉风景的壮丽和美食的诱人，让我更加珍惜生活中的每一个瞬间。</p>
+                    
+                    <h3 style="margin-top: 30px;">专业技能</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> UI/UX设计</li>
+                        <li><i class="fas fa-check"></i> 平面设计</li>
+                        <li><i class="fas fa-check"></i> 摄影与后期</li>
+                        <li><i class="fas fa-check"></i> 前端开发基础</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚（同首页） -->
+    <footer class="footer">
+        <!-- 复制首页的页脚代码 -->
+    </footer>
 
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/page-transitions.js"></script>
 </body>
 </html>
