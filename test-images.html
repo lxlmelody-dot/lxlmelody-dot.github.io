@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片测试页面 | 梁熙蕾</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-img {
+            max-width: 300px;
+            height: 200px;
+            border: 2px solid #ddd;
+            margin: 10px;
+            display: inline-block;
+        }
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>图片链接测试页面</h1>
+
+    <div class="test-section">
+        <h2>作品集图片测试</h2>
+
+        <div>
+            <p>插画作品测试：</p>
+            <img src="assets/images/portfolio/插画1.jpg" class="test-img" alt="插画测试" onload="this.nextElementSibling.innerHTML='✅ 插画1.jpg 加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 插画1.jpg 加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+
+        <div>
+            <p>色彩作品测试：</p>
+            <img src="assets/images/portfolio/色彩2.JPG" class="test-img" alt="色彩测试" onload="this.nextElementSibling.innerHTML='✅ 色彩2.JPG 加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 色彩2.JPG 加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+
+        <div>
+            <p>素描作品测试：</p>
+            <img src="assets/images/portfolio/素描2.HEIC" class="test-img" alt="素描测试" onload="this.nextElementSibling.innerHTML='✅ 素描2.HEIC 加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 素描2.HEIC 加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>风景图片测试</h2>
+
+        <div>
+            <p>穹窿山测试：</p>
+            <img src="assets/images/landscapes/qionglongshan/穹窿山1.HEIC" class="test-img" alt="穹窿山测试" onload="this.nextElementSibling.innerHTML='✅ 穹窿山1.HEIC 加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 穹窿山1.HEIC 加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+
+        <div>
+            <p>岚山测试：</p>
+            <img src="assets/images/landscapes/lanshan/40f5049fd62d8d023bf20ac2e6d7e494.jpg" class="test-img" alt="岚山测试" onload="this.nextElementSibling.innerHTML='✅ 岚山图片加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 岚山图片加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+
+        <div>
+            <p>金阁寺测试：</p>
+            <img src="assets/images/landscapes/kinkakuji/11affbf86f5af53379e5cc14b8e7c41b.jpg" class="test-img" alt="金阁寺测试" onload="this.nextElementSibling.innerHTML='✅ 金阁寺图片加载成功'" onerror="this.nextElementSibling.innerHTML='❌ 金阁寺图片加载失败'">
+            <p class="status">测试中...</p>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>问题诊断信息</h2>
+        <p>当前时间： <span id="time"></span></p>
+        <p>页面路径： <script>document.write(window.location.pathname)</script></p>
+        <p>完整URL： <script>document.write(window.location.href)</script></p>
+    </div>
+
+    <script>
+        document.getElementById('time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
