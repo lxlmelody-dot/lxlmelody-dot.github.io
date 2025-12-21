@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咖啡品牌视觉设计 | Melody</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 页面过渡动画 */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffb6c1, #ffe4e9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-transition.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, #ffe4e9, #ffb6c1);
+            padding: 140px 20px 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .detail-title {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .detail-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .detail-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.9);
+            color: #ff91a4;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .detail-section {
+            padding: 80px 20px;
+        }
+
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-image i {
+            font-size: 4rem;
+            color: #ffb6c1;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .main-content h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .main-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+        }
+
+        .gallery-image {
+            height: 200px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-image i {
+            font-size: 2.5rem;
+            color: #ffb6c1;
+        }
+
+        .process-section {
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .process-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .process-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: #ffb6c1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .process-content h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .process-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 60px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #ffb6c1;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .detail-title {
+                font-size: 2rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面过渡动画 -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">加载中...</div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                        <div class="logo-img">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Melody</h1>
+                            <p>生活记录者</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    <a href="../pages/about.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    <a href="../pages/portfolio.html" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>作品集</span>
+                    </a>
+                    <a href="../pages/landscapes.html" class="nav-link">
+                        <i class="fas fa-mountain"></i>
+                        <span>风景</span>
+                    </a>
+                    <a href="../pages/contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>联系</span>
+                    </a>
+                </div>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="detail-header">
+        <h1 class="detail-title">咖啡品牌视觉设计</h1>
+        <p class="detail-subtitle">为精品咖啡品牌设计的完整视觉识别系统</p>
+        <div class="detail-tags">
+            <span class="tag">品牌设计</span>
+            <span class="tag">VI系统</span>
+            <span class="tag">包装设计</span>
+        </div>
+    </section>
+
+    <!-- 详情内容 -->
+    <section class="detail-section">
+        <div class="detail-container">
+            <!-- 主图 -->
+            <div class="hero-image">
+                <div class="placeholder-img portfolio-placeholder">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>咖啡品牌视觉设计主视觉</span>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- 主要内容 -->
+                <div class="main-content">
+                    <h2>项目概述</h2>
+                    <p>
+                        这是一个为新兴精品咖啡品牌打造的完整视觉识别系统。客户希望创建一个既有现代感又带有温馨氛围的品牌形象，
+                        能够在竞争激烈的咖啡市场中脱颖而出，吸引年轻消费群体。
+                    </p>
+                    <p>
+                        设计理念围绕"手作的温度"展开，通过温暖的色彩、有机的形状和精致的细节，传达出咖啡制作的匠心精神。
+                        整体设计风格简约而不简单，注重细节处理和品牌一致性。
+                    </p>
+
+                    <h2>设计挑战</h2>
+                    <p>
+                        项目面临的主要挑战是如何在保持品牌专业性的同时，展现出咖啡的独特魅力和人文情怀。我们需要平衡现代感与传统感，
+                        既要有吸引年轻消费者的时尚元素，又要传达出咖啡文化的深厚底蕴。
+                    </p>
+
+                    <h2>解决方案</h2>
+                    <p>
+                        通过深入的市场调研和用户分析，我们提出了一个基于"温暖、精致、创新"的设计方案。色彩方案采用温暖的棕色系作为主色调，
+                        搭配明亮的辅助色彩，营造出既专业又亲和的品牌形象。
+                    </p>
+                    <p>
+                        Logo设计融合了咖啡豆的形态和抽象的手工元素，既直观又富有艺术感。整体视觉系统强调一致性和灵活性，
+                        能够适应各种应用场景的需求。
+                    </p>
+                </div>
+
+                <!-- 侧边栏信息 -->
+                <div class="sidebar">
+                    <div class="info-card">
+                        <h3>项目信息</h3>
+                        <div class="info-item">
+                            <span class="info-label">客户</span>
+                            <span class="info-value">精品咖啡品牌</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">项目时间</span>
+                            <span class="info-value">2023年3-5月</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">服务内容</span>
+                            <span class="info-value">品牌VI设计</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">项目状态</span>
+                            <span class="info-value">已完成</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>服务范围</h3>
+                        <div class="info-item">
+                            <span class="info-label">品牌策略</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Logo设计</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">色彩系统</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">字体设计</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">包装设计</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">应用设计</span>
+                            <span class="info-value">✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片展示 -->
+            <h2 style="text-align: center; font-size: 2rem; margin-bottom: 40px;">设计展示</h2>
+            <div class="image-gallery">
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-mug-hot"></i>
+                        <span>Logo设计</span>
+                    </div>
+                </div>
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-palette"></i>
+                        <span>色彩系统</span>
+                    </div>
+                </div>
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-font"></i>
+                        <span>字体规范</span>
+                    </div>
+                </div>
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-box"></i>
+                        <span>包装设计</span>
+                    </div>
+                </div>
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-store"></i>
+                        <span>店面应用</span>
+                    </div>
+                </div>
+                <div class="gallery-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>数字应用</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设计流程 -->
+            <div class="process-section">
+                <h2>设计流程</h2>
+                <div class="process-timeline">
+                    <div class="process-item">
+                        <div class="process-number">1</div>
+                        <div class="process-content">
+                            <h3>品牌调研</h3>
+                            <p>深入了解客户需求、目标市场和竞争对手分析，确定品牌定位和核心价值。</p>
+                        </div>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-number">2</div>
+                        <div class="process-content">
+                            <h3>概念设计</h3>
+                            <p>基于调研结果，提出多个设计方向和概念，通过草图和情绪板进行视觉表达。</p>
+                        </div>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-number">3</div>
+                        <div class="process-content">
+                            <h3>视觉设计</h3>
+                            <p>确定最终设计方向，完成Logo、色彩、字体等核心元素的设计，建立完整的视觉系统。</p>
+                        </div>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-number">4</div>
+                        <div class="process-content">
+                            <h3>应用拓展</h3>
+                            <p>将视觉系统应用到各种载体上，包括包装、店面、宣传物料等，确保品牌形象的一致性。</p>
+                        </div>
+                    </div>
+                    <div class="process-item">
+                        <div class="process-number">5</div>
+                        <div class="process-content">
+                            <h3>交付实施</h3>
+                            <p>提供完整的品牌指南文件，协助客户进行品牌落地和应用，确保设计效果的完美呈现。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 导航 -->
+            <div class="navigation">
+                <a href="../pages/portfolio.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    返回作品集
+                </a>
+                <a href="../details/portfolio-detail2.html" class="nav-link">
+                    下一个作品
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Melody</h3>
+                        <p>记录生活，分享美好</p>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="../index.html">首页</a></li>
+                        <li><a href="../pages/about.html">关于我</a></li>
+                        <li><a href="../pages/portfolio.html">作品集</a></li>
+                        <li><a href="../pages/landscapes.html">风景</a></li>
+                        <li><a href="../pages/contact.html">联系</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>社交媒体</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/lxlmelody-dot" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>联系方式</h4>
+                    <p><i class="fas fa-envelope"></i> lxlmelody520@126.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 江苏省苏州市</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Melody. 保留所有权利.</p>
+                <div class="footer-meta">
+                    <a href="#" class="footer-link">隐私政策</a>
+                    <a href="#" class="footer-link">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/page-transitions.js"></script>
+
+    <script>
+        // 页面加载完成后隐藏过渡动画
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const transition = document.getElementById('pageTransition');
+                transition.classList.add('fade-out');
+                setTimeout(function() {
+                    transition.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
