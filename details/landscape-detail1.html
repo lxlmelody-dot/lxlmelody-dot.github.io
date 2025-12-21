@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山间日出 | Melody</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 页面过渡动画 */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffb6c1, #ffe4e9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-transition.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, #ffe4e9, #ffb6c1);
+            padding: 100px 20px 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .detail-title {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .detail-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .photo-detail-section {
+            padding: 60px 20px;
+        }
+
+        .photo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-photo {
+            width: 100%;
+            max-height: 600px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .main-photo .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .main-photo i {
+            font-size: 5rem;
+            color: #ffb6c1;
+        }
+
+        .main-photo span {
+            font-size: 1.3rem;
+            color: #666;
+        }
+
+        .photo-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .photo-description {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-description h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .photo-description p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .photo-meta {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-meta h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .meta-item:last-child {
+            border-bottom: none;
+        }
+
+        .meta-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #666;
+        }
+
+        .meta-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .photo-specs {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .spec-item {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .spec-item strong {
+            color: #333;
+        }
+
+        .photo-story {
+            background: linear-gradient(135deg, #f9f9f9, #ffe4e9);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+
+        .photo-story h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .story-text {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .story-text p {
+            margin-bottom: 20px;
+        }
+
+        .story-quote {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .story-quote::before {
+            content: '"';
+            font-size: 3rem;
+            color: #ffb6c1;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            opacity: 0.5;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .story-image i {
+            font-size: 3rem;
+            color: #ffb6c1;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 60px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #ffb6c1;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .photo-info,
+            .story-content {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-meta {
+                order: -1;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面过渡动画 -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loader-text">加载中...</div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="../index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+                        <div class="logo-img">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1>Melody</h1>
+                            <p>生活记录者</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="nav-menu">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>首页</span>
+                    </a>
+                    <a href="../pages/about.html" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <span>关于我</span>
+                    </a>
+                    <a href="../pages/portfolio.html" class="nav-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>作品集</span>
+                    </a>
+                    <a href="../pages/landscapes.html" class="nav-link">
+                        <i class="fas fa-mountain"></i>
+                        <span>风景</span>
+                    </a>
+                    <a href="../pages/contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>联系</span>
+                    </a>
+                </div>
+
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 页面标题 -->
+    <section class="detail-header">
+        <h1 class="detail-title">山间日出</h1>
+        <p class="detail-subtitle">清晨第一缕阳光照亮山峰的壮美时刻</p>
+    </section>
+
+    <!-- 照片详情 -->
+    <section class="photo-detail-section">
+        <div class="photo-container">
+            <!-- 主图 -->
+            <div class="main-photo">
+                <div class="placeholder-img landscape-placeholder">
+                    <i class="fas fa-mountain"></i>
+                    <span>山间日出 - 主图</span>
+                </div>
+            </div>
+
+            <div class="photo-info">
+                <!-- 照片描述 -->
+                <div class="photo-description">
+                    <h2>作品描述</h2>
+                    <p>
+                        这张照片拍摄于黄山清晨5点，当第一缕阳光穿透云层，照亮巍峨的山峰时，我按下了快门。
+                        这是一个令人震撼的时刻，大自然的力量在这一刻得到了完美的展现。
+                    </p>
+                    <p>
+                        为了捕捉这个瞬间，我凌晨3点就开始登山，在寒风中等待了两个小时。当太阳升起的那一刻，
+                        所有的辛苦都化为了值得。金色的阳光洒在山峰上，云海在脚下翻腾，远处的山峦层层叠叠，
+                        形成了一幅令人难忘的画面。
+                    </p>
+                    <p>
+                        这次拍摄让我深刻体会到，最美的风景往往需要付出最大的努力。摄影不仅仅是记录瞬间，
+                        更是对大自然的敬畏和对生活的热爱。
+                    </p>
+                </div>
+
+                <!-- 照片信息 -->
+                <div class="photo-meta">
+                    <h3>拍摄信息</h3>
+                    <div class="meta-item">
+                        <span class="meta-label">
+                            <i class="fas fa-map-marker-alt"></i>
+                            拍摄地点
+                        </span>
+                        <span class="meta-value">黄山风景区</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">
+                            <i class="fas fa-calendar"></i>
+                            拍摄时间
+                        </span>
+                        <span class="meta-value">2024年3月15日</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">
+                            <i class="fas fa-clock"></i>
+                            具体时间
+                        </span>
+                        <span class="meta-value">05:42 AM</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">
+                            <i class="fas fa-cloud"></i>
+                            天气状况
+                        </span>
+                        <span class="meta-value">晴朗</span>
+                    </div>
+
+                    <div class="photo-specs">
+                        <div class="spec-item"><strong>相机:</strong> Canon EOS R5</div>
+                        <div class="spec-item"><strong>镜头:</strong> RF 24-70mm f/2.8</div>
+                        <div class="spec-item"><strong>焦距:</strong> 45mm</div>
+                        <div class="spec-item"><strong>光圈:</strong> f/8</div>
+                        <div class="spec-item"><strong>快门:</strong> 1/125s</div>
+                        <div class="spec-item"><strong>ISO:</strong> 200</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 拍摄故事 -->
+            <div class="photo-story">
+                <h2>拍摄故事</h2>
+                <div class="story-content">
+                    <div class="story-text">
+                        <p>
+                            这张照片的背后有一个关于坚持和等待的故事。为了拍摄黄山的日出，我提前两天就来到了山脚，
+                            研究天气预报和日出时间。当地人告诉我，黄山的日出是最美的，但也最难以捕捉。
+                        </p>
+                        <div class="story-quote">
+                            摄影教会了我耐心，也让我明白了等待的价值。最美的风景往往出现在最意想不到的时刻。
+                        </div>
+                        <p>
+                            拍摄当天的经历更是难忘。凌晨的登山路上，只有头灯照亮前方，寒风刺骨，但我心中的期待却越来越强烈。
+                            当我到达拍摄点时，天空还是一片漆黑，只有远处的地平线透着一丝微光。
+                        </p>
+                        <p>
+                            当太阳终于升起的那一刻，所有的疲劳都烟消云散。金色的阳光穿透云层，照亮了整个山谷。
+                            这不仅仅是一次成功的拍摄，更是一次与大自然深度对话的经历。
+                        </p>
+                    </div>
+                    <div class="story-image">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 导航 -->
+            <div class="navigation">
+                <a href="../pages/landscapes.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i>
+                    返回风景
+                </a>
+                <a href="../details/landscape-detail2.html" class="nav-link">
+                    下一张照片
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Melody</h3>
+                        <p>记录生活，分享美好</p>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="../index.html">首页</a></li>
+                        <li><a href="../pages/about.html">关于我</a></li>
+                        <li><a href="../pages/portfolio.html">作品集</a></li>
+                        <li><a href="../pages/landscapes.html">风景</a></li>
+                        <li><a href="../pages/contact.html">联系</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-social">
+                    <h4>社交媒体</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/lxlmelody-dot" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>联系方式</h4>
+                    <p><i class="fas fa-envelope"></i> melody.design@example.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 江苏省苏州市</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Melody. 保留所有权利.</p>
+                <div class="footer-meta">
+                    <a href="#" class="footer-link">隐私政策</a>
+                    <a href="#" class="footer-link">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/page-transitions.js"></script>
+
+    <script>
+        // 页面加载完成后隐藏过渡动画
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const transition = document.getElementById('pageTransition');
+                transition.classList.add('fade-out');
+                setTimeout(function() {
+                    transition.style.display = 'none';
+                }, 500);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
